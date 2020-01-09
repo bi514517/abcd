@@ -18,18 +18,27 @@ export class AuthService {
 
     public login(user: User){
 
-          let payload = `${user.name}${user.id}`;
-          const accessToken = this.jwtService.sign(payload);
+        let payload = `${user.name}${user.id}`;
+        const accessToken = this.jwtService.sign(payload);
+        console.log(user);
+        
+        if(this.userService.findIndex(user.name,"name") != -1 &&
+            this.userService.findIndex(user.password,"password") != -1)
+            return {
+                expires_in: 3600,
+                access_token: accessToken,
+                user_id: payload,
+                status: 200
+            };
+        else return {
+            mess: "Đăng nhập thất bại",
+            status: 404
+        }
 
-          return {
-             expires_in: 3600,
-             access_token: accessToken,
-             user_id: payload,
-             status: 200
-          };
     }
 
     public register(user: User){
+        user.id = Math.floor(Math.random() * 100000);
         return this.userService.createUser(user)
     } 
 }

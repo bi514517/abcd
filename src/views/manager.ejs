@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+<table>
+  <tr>
+    <th>name</th>
+    <th>email</th>
+    <th></th>
+  </tr>
+  <% data.forEach(function(user) { %>
+  <tr>
+    <td><%= user.name %></td>
+    <td><%= user.email %></td>
+    <td><button onclick="window.location.href = '../user/delete/<%= user.id %>'">delete</button></td>
+  </tr>
+  <% }); %>
+</table>
+<button onclick="window.location.href = '../user/register'">add new</button>
+<button onclick="window.location.href = '../user/login'">login</button>
+</body>
+</html>

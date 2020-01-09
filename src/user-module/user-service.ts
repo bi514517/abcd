@@ -15,11 +15,15 @@ export class UserService {
         a[this.findIndex(user.id,"id")] = user
         return user;
     }
-    delUser(id : number){
+    delUser(id : string){
         const idx = this.findIndex(id,"id")
-        const name = a[idx]["name"];
-        a.slice(idx,1);
-        return "đã xóa " + name;
+        var b = [];
+        a.filter(function(ele,i){
+            if(i != idx)
+            b.push(ele);
+        });
+        a = b;
+        return "đã xóa "
     }
     findByEmail(email: string): Promise<User> {
         return a[this.findIndex(email,"email")];
@@ -31,7 +35,8 @@ export class UserService {
     findIndex(value,type){
         var index = -1;
         a.forEach((element,i) => {
-            element[type] = value;
+            if(element[type] == value)
+                index = i;
         });
         return index;
     }

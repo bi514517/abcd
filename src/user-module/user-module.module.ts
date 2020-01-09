@@ -7,7 +7,7 @@ import { UserControllerController } from './user-controller/user-controller.cont
 @Module({
   imports: [    JwtModule.register({
     secretOrPrivateKey: 'secret12356789'
-})],
+  })],
   providers: [UserService,AuthService],
   controllers: [UserControllerController]
 })
